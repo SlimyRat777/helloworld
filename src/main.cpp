@@ -22,25 +22,30 @@
 		https://github.com/g-truc/glm
 */
 
+// This header files contains declarations for functions and variables that are used across multiple C files.
 #include "helloworld.h"
 
+// I include this file to throw runtime errors, but you can also use it to output debugging information.
 #include <iostream>
 
 int resolution = 1024;
 unsigned char* output_image_ptr = nullptr;
 
+/*
+ * Create a placeholder image that's simple, but looks interesting enough so that you know the code is working correctly.
+ */
 void DummyImage() {
-	for (int yi = 0; yi < resolution; yi++) {
+	for (int yi = 0; yi < resolution; yi++) {							// iterate through each pixel in the image
 		for (int xi = 0; xi < resolution; xi++) {
-			float r = (float)xi / (float)resolution;
+			float r = (float)xi / (float)resolution;					// calculate red, green, and blue values that depend on pixel position
 			float g = (float)yi / (float)resolution;
 			float b = (float)(resolution - xi) / (float)resolution;
 
-			int idx = yi * resolution * 4 + xi * 4;
-			output_image_ptr[idx + 0] = r * 255;
-			output_image_ptr[idx + 1] = g * 255;
-			output_image_ptr[idx + 2] = b * 255;
-			output_image_ptr[idx + 3] = 128;
+			int idx = yi * resolution * 4 + xi * 4;						// calculate the starting position for the current pixel
+			output_image_ptr[idx + 0] = (unsigned char)(r * 255.0f);	// update the red, green, blue, and alpha channels in the image
+			output_image_ptr[idx + 1] = (unsigned char)(g * 255.0f);
+			output_image_ptr[idx + 2] = (unsigned char)(b * 255.0f);
+			output_image_ptr[idx + 3] = 255;
 		}
 	}
 }
@@ -84,7 +89,6 @@ int main(int argc, const char* argv[]) {
 	*/
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
 
 	// This sets the GUI style to one that I personally think looks cool
 	ImGui::StyleColorsDark();
@@ -102,7 +106,7 @@ int main(int argc, const char* argv[]) {
 
 	/*
 	* This initializes a library called the OpenGL Extension Wrangler (GLEW) library. This is mostly
-	* used for Windows and is a side-effect of how the OpenGL library works with the operating system.
+	* used for Windows and is a side effect of how the OpenGL library works with the operating system.
 	* Basically, by default Windows only provides access to a very early version of OpenGL. This library
 	* "mines" the OpenGL libraries to figure out what extensions are ACTUALLY supported by your graphics
 	* driver. Don't worry too much about this - you'll probably never use anything beyond these two lines
@@ -117,7 +121,8 @@ int main(int argc, const char* argv[]) {
 	 */
 	output_image_ptr = new unsigned char[resolution * resolution * 4];
 
-	/* This function creates a placeholder image so that you see a result on the screen the first time you run it.
+	/*
+	 * This function creates a placeholder image so that you see a result on the screen the first time you run it.
 	 * You should see an "RGB square" where the red and blue channels change along the x-axis and the green channel
 	 * changes along the y-axis.
 	 */
@@ -126,13 +131,13 @@ int main(int argc, const char* argv[]) {
 	/*
 	* This is what we call the "main rendering loop" (sometimes in gaming you'll call it the "main game loop".
 	* This is where everything in the program happens. Every iteration through the loop re-draws everything
-	* onto the window (including the user interface). It also queries all of the possible inputs (mouse, 
+	* onto the window (including the user interface). It also queries sources for user input (mouse,
 	* keyboard, etc.) and updates variables based on callback functions that you define. This loop runs
 	* continuously until you kill the program (ex. by pressing the X button to close the window).
 	*/
 	while (!glfwWindowShouldClose(window)) {
 
-		// This function checks all of the input sources (keyboard, mouse, etc.) and executes callback functions
+		// This function checks potential input sources (keyboard, mouse, etc.) and executes callback functions
 		glfwPollEvents();
 
 		// This function tells OpenGL to clear the window (in this case it writes the color "black" to all pixels)
@@ -146,7 +151,7 @@ int main(int argc, const char* argv[]) {
 		* of memory on your graphics card that displays the contents of the screen. The monitor reads this region
 		* of memory every time it refreshes. This introduces a problem: if you draw to this area of memory
 		* the user may be able to see the individual objects that you draw, resulting in "flickering". Double
-		* buffering prevents this by sending all of the draw calls to a "back buffer" that isn't displayed on the
+		* buffering prevents this by sending the draw calls to a "back buffer" that isn't displayed on the
 		* computer monitor. This function switches the memory pointers so that the information on the monitor
 		* is updated immediately.
 		*/
@@ -155,7 +160,7 @@ int main(int argc, const char* argv[]) {
 	}
 
 	/*
-	* All of these functions just destroy all of the stuff that we've created to make sure that there aren't any
+	* All of these functions just destroy the stuff that we've created to make sure that there aren't any
 	* memory leaks.
 	*/
 	ImGui_ImplOpenGL3_Shutdown();					// Shut down ImGui's connection with OpenGL

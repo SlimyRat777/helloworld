@@ -1,5 +1,6 @@
 #include "helloworld.h"
 
+// This variable stores the OpenGL ID for the texture used to display the output image on the screen
 GLuint output_image_tex = 0;
 
 /*

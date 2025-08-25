@@ -17,7 +17,10 @@ void ImGuiRender() {
 	// This function creates a new "Frame", which is the basic foundation of an ImGui UI
 	ImGui::NewFrame(); {
 
-		// This renders an ImGui "Demo" window that shows off its UI elements (you can delete this and replace it with your own)
+		/* This renders an ImGui "Demo" window that shows off its UI elements (you can delete this and replace it with your own)
+		 * You can get an equivalent of this window online, which also provides the code necessary to create each UI element:
+		 * https://pthom.github.io/imgui_manual_online/manual/imgui_manual.html
+		 */
 		ImGui::ShowDemoWindow();
 
 		// This renders an ImGui window displaying the output image
