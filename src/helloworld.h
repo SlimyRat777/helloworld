@@ -7,5 +7,9 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
+extern unsigned char* output_image_ptr;
+extern int resolution;
+
 void ImGuiRender();
-void RenderScene();
+void RenderOutputImage();
+void UpdateOutputTexture();

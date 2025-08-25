@@ -1,7 +1,3 @@
-#include "helloworld.h"
-
-#include <iostream>
-
 /*
 	This is a demo program designed to teach you how to compile an application that uses
 	multiple libraries:
@@ -25,6 +21,29 @@
 		2D and 3D graphics.
 		https://github.com/g-truc/glm
 */
+
+#include "helloworld.h"
+
+#include <iostream>
+
+int resolution = 1024;
+unsigned char* output_image_ptr = nullptr;
+
+void DummyImage() {
+	for (int yi = 0; yi < resolution; yi++) {
+		for (int xi = 0; xi < resolution; xi++) {
+			float r = (float)xi / (float)resolution;
+			float g = (float)yi / (float)resolution;
+			float b = (float)(resolution - xi) / (float)resolution;
+
+			int idx = yi * resolution * 4 + xi * 4;
+			output_image_ptr[idx + 0] = r * 255;
+			output_image_ptr[idx + 1] = g * 255;
+			output_image_ptr[idx + 2] = b * 255;
+			output_image_ptr[idx + 3] = 128;
+		}
+	}
+}
 
 int main(int argc, const char* argv[]) {
 
@@ -92,6 +111,18 @@ int main(int argc, const char* argv[]) {
 	if (glewInit() != GLEW_OK)
 		throw std::runtime_error("Failed to initialize GLEW");
 
+
+	/*
+	 * Allocate space on the heap to store the image that will be displayed on the screen.
+	 */
+	output_image_ptr = new unsigned char[resolution * resolution * 4];
+
+
+	DummyImage();
+
+	glEnable(GL_TEXTURE);
+	glEnable(GL_TEXTURE_2D);
+
 	/*
 	* This is what we call the "main rendering loop" (sometimes in gaming you'll call it the "main game loop".
 	* This is where everything in the program happens. Every iteration through the loop re-draws everything
@@ -107,9 +138,6 @@ int main(int argc, const char* argv[]) {
 		// This function tells OpenGL to clear the window (in this case it writes the color "black" to all pixels)
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		// This function is in helloworld_render.cpp and should currently be rendering a colored rectangle
-		RenderScene();
-		
 		// This function is defined in the helloworld_gui.cpp file and renders the user interface
 		ImGuiRender();
 

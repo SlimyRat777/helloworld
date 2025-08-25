@@ -17,11 +17,14 @@ void ImGuiRender() {
 	// This function creates a new "Frame", which is the basic foundation of an ImGui UI
 	ImGui::NewFrame(); {
 
-		// This is where I'm cheating: ImGui comes with this Demo window that shows off the UI elements
+		// This renders an ImGui "Demo" window that shows off its UI elements (you can delete this and replace it with your own)
 		ImGui::ShowDemoWindow();
+
+		// This renders an ImGui window displaying the output image
+		RenderOutputImage();
 	}
 	
-	// This function makes all of the graphics API calls (in this case OpenGL) to render the user interface
+	// This function makes the graphics API calls (in this case OpenGL) to render the user interface
 	ImGui::Render();
 
 	// This actually copies the GUI to the OpenGL frame buffer (in this case probably the GLFW back buffer)
