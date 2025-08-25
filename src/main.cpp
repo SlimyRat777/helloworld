@@ -117,11 +117,11 @@ int main(int argc, const char* argv[]) {
 	 */
 	output_image_ptr = new unsigned char[resolution * resolution * 4];
 
-
+	/* This function creates a placeholder image so that you see a result on the screen the first time you run it.
+	 * You should see an "RGB square" where the red and blue channels change along the x-axis and the green channel
+	 * changes along the y-axis.
+	 */
 	DummyImage();
-
-	glEnable(GL_TEXTURE);
-	glEnable(GL_TEXTURE_2D);
 
 	/*
 	* This is what we call the "main rendering loop" (sometimes in gaming you'll call it the "main game loop".
