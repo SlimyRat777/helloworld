@@ -29,7 +29,7 @@
 #include <iostream>
 
 int resolution = 1024;
-unsigned char* output_image_ptr = nullptr;
+float* output_image_ptr = nullptr;
 
 /*
  * Create a placeholder image that's simple, but looks interesting enough so that you know the code is working correctly.
@@ -42,10 +42,10 @@ void DummyImage() {
 			float b = (float)(resolution - xi) / (float)resolution;
 
 			int idx = yi * resolution * 4 + xi * 4;						// calculate the starting position for the current pixel
-			output_image_ptr[idx + 0] = (unsigned char)(r * 255.0f);	// update the red, green, blue, and alpha channels in the image
-			output_image_ptr[idx + 1] = (unsigned char)(g * 255.0f);
-			output_image_ptr[idx + 2] = (unsigned char)(b * 255.0f);
-			output_image_ptr[idx + 3] = 255;
+			output_image_ptr[idx + 0] = r;								// update the red, green, blue, and alpha channels in the image
+			output_image_ptr[idx + 1] = g;
+			output_image_ptr[idx + 2] = b;
+			output_image_ptr[idx + 3] = 1.0f;
 		}
 	}
 }
@@ -119,7 +119,7 @@ int main(int argc, const char* argv[]) {
 	/*
 	 * Allocate space on the heap to store the image that will be displayed on the screen.
 	 */
-	output_image_ptr = new unsigned char[resolution * resolution * 4];
+	output_image_ptr = new float[resolution * resolution * 4];
 
 	/*
 	 * This function creates a placeholder image so that you see a result on the screen the first time you run it.

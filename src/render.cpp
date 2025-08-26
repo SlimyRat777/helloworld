@@ -44,7 +44,7 @@ void UpdateOutputTexture() {
      * 8) The data type used to store the pixel data (we're using 8-but unsigned integers)
      * 9) A pointer to the pixel data to upload to the GPU
      */
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, resolution, resolution, 0, GL_RGBA, GL_UNSIGNED_BYTE, output_image_ptr);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, resolution, resolution, 0, GL_RGBA, GL_FLOAT, output_image_ptr);
 }
 
 /* This function is called every time the user interface is updated (which happens every iteration of the main loop).
