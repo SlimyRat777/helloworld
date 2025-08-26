@@ -11,5 +11,5 @@ extern float* output_image_ptr;
 extern int resolution;
 
 void ImGuiRender();
-void RenderOutputImage();
+void DrawOutputImage();
 void UpdateOutputTexture();

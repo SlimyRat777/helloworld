@@ -24,7 +24,7 @@ void ImGuiRender() {
 		ImGui::ShowDemoWindow();
 
 		// This renders an ImGui window displaying the output image
-		RenderOutputImage();
+		DrawOutputImage();
 	}
 	
 	// This function makes the graphics API calls (in this case OpenGL) to render the user interface

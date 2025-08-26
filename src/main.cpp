@@ -28,7 +28,7 @@
 // I include this file to throw runtime errors, but you can also use it to output debugging information.
 #include <iostream>
 
-int resolution = 1024;
+int resolution = 64;
 float* output_image_ptr = nullptr;
 
 /*

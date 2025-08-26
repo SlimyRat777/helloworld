@@ -63,7 +63,7 @@ include_directories(
 add_executable(helloworld
 			   src/gui.cpp
 			   src/main.cpp
-			   src/render.cpp
+		       src/display.cpp
 			   src/helloworld.h
 )
 

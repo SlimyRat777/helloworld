@@ -50,7 +50,7 @@ void UpdateOutputTexture() {
 /* This function is called every time the user interface is updated (which happens every iteration of the main loop).
  * This displays the contents of the current output image on the screen in an ImGui window.
  */
-void RenderOutputImage() {
+void DrawOutputImage() {
 
     // Update the OpenGL texture (on the GPU) with the current image data in main memory
     UpdateOutputTexture();
@@ -58,8 +58,11 @@ void RenderOutputImage() {
     // Create a new ImGui window to show the image - call it whatever you want
     ImGui::Begin("Hello World!");
 
+    // Get the size of the window region that can be drawn to
+    ImVec2 viewport_size = ImGui::GetContentRegionAvail();
+
     // Use ImGui to render the image to the screen (we've set up ImGui to use OpenGL, so we provide an OpenGL texture to render)
-    ImGui::Image((ImTextureID)(intptr_t)output_image_tex, ImVec2(resolution, resolution));
+    ImGui::Image((ImTextureID)(intptr_t)output_image_tex, viewport_size);
 
     // This is the only thing displayed in the window
     ImGui::End();
