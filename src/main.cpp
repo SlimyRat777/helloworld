@@ -28,8 +28,9 @@
 // I include this file to throw runtime errors, but you can also use it to output debugging information.
 #include <iostream>
 
-int resolution = 64;
-float* output_image_ptr = nullptr;
+int resolution = 64;					// resolution of the output image (you can add a user interface element to change this)
+float* output_image_ptr = nullptr;		// pointer to the output image data (if you change the resolution make sure to change this!)
+float frame_seconds = 0.0f;		// time it takes to go through the main "game" loop (directly translates to frame rate or fps)
 
 /*
  * Create a placeholder image that's simple, but looks interesting enough so that you know the code is working correctly.
@@ -128,6 +129,8 @@ int main(int argc, const char* argv[]) {
 	 */
 	DummyImage();
 
+
+
 	/*
 	* This is what we call the "main rendering loop" (sometimes in gaming you'll call it the "main game loop".
 	* This is where everything in the program happens. Every iteration through the loop re-draws everything
@@ -136,6 +139,7 @@ int main(int argc, const char* argv[]) {
 	* continuously until you kill the program (ex. by pressing the X button to close the window).
 	*/
 	while (!glfwWindowShouldClose(window)) {
+		auto start = std::chrono::high_resolution_clock::now();
 
 		// This function checks potential input sources (keyboard, mouse, etc.) and executes callback functions
 		glfwPollEvents();
@@ -157,6 +161,9 @@ int main(int argc, const char* argv[]) {
 		*/
 		glfwSwapBuffers(window);                    // swap the double buffer
 
+		auto end = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<float> duration = end - start;
+		frame_seconds = duration.count();
 	}
 
 	/*
