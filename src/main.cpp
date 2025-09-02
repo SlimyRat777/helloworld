@@ -102,7 +102,7 @@ int main(int argc, const char* argv[]) {
 	* sub-language that is part of OpenGL and used to render stuff to individual pixels in the window.
 	*/	
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	const char* glsl_version = "#version 130";
+	const char* glsl_version = "#version 120";
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
 	/*
